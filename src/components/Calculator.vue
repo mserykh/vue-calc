@@ -8,7 +8,7 @@
     <div @click="append('7')" class="btn">7</div>
     <div @click="append('8')" class="btn">8</div>
     <div @click="append('9')" class="btn">9</div>
-    <div @click="times" class="btn operator">x</div>
+    <div @click="multiply" class="btn operator">x</div>
     <div @click="append('4')" class="btn">4</div>
     <div @click="append('5')" class="btn">5</div>
     <div @click="append('6')" class="btn">6</div>
@@ -25,7 +25,7 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       previous: null,
       current: '',
@@ -40,14 +40,15 @@ export default {
     },
     sign() {
       this.current = this.current.charAt(0) === '-' ?
-        this.current.slice(1) : `-${this.current}`;
+        this.current.slice(1) :
+        `-${this.current}`;
     },
     percent() {
       this.current = `${parseFloat(this.current) / 100}`;
     },
     append(number) {
       if (this.isOperatorClicked) {
-        this.current = '';
+        this.clear();
         this.isOperatorClicked = false;
       }
       this.current = `${this.current}${number}`;
@@ -61,12 +62,11 @@ export default {
       this.previous = this.current;
       this.isOperatorClicked = true;
     },
-
     divide() {
       this.operator = (a, b) => a / b;
       this.setPrevious();
     },
-    times() {
+    multiply() {
       this.operator = (a, b) => a * b;
       this.setPrevious();
     },
@@ -79,11 +79,11 @@ export default {
       this.setPrevious();
     },
     equal() {
-        this.current = `${this.operator(
-          parseFloat(this.previous),
-          parseFloat(this.current)
-          )}`;
-          this.previous = null;
+      this.current = `${this.operator(
+        parseFloat(this.previous),
+        parseFloat(this.current)
+        )}`;
+        this.previous = null;
     }
   }
 }
