@@ -1,6 +1,5 @@
 <template>
-  <div id="app">
-    
+  <div class="app" id="app">
     <Calculator />
   </div>
 </template>
@@ -16,8 +15,8 @@ export default {
 }
 </script>
 
-<style>
-#app {
+<style scoped>
+.app {
   font-family: Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
