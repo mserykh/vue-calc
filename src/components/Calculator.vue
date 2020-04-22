@@ -25,14 +25,12 @@
 
 <script>
 export default {
-  data() {
-    return {
+  data: () => ({
       previous: null,
       current: '',
       operator: null,
       isOperatorClicked: false,
-    }
-  },
+  }),
 
   methods: {
     clear() {
