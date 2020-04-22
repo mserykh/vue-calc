@@ -28,7 +28,7 @@ export default {
   data () {
     return {
       previous: null,
-      current: '600',
+      current: '',
       operator: null,
       isOperatorClicked: false,
     }
@@ -46,6 +46,10 @@ export default {
       this.current = `${parseFloat(this.current) / 100}`;
     },
     append(number) {
+      if (this.isOperatorClicked) {
+        this.current = '';
+        this.isOperatorClicked = false;
+      }
       this.current = `${this.current}${number}`;
     },
     dot() {
@@ -53,20 +57,33 @@ export default {
         this.append('.');
       }
     },
+    setPrevious() {
+      this.previous = this.current;
+      this.isOperatorClicked = true;
+    },
+
     divide() {
       this.operator = (a, b) => a / b;
+      this.setPrevious();
     },
     times() {
       this.operator = (a, b) => a * b;
+      this.setPrevious();
     },
     minus() {
       this.operator = (a, b) => a - b;
+      this.setPrevious();
     },
     add() {
       this.operator = (a, b) => a + b;
+      this.setPrevious();
     },
     equal() {
-
+        this.current = `${this.operator(
+          parseFloat(this.previous),
+          parseFloat(this.current)
+          )}`;
+          this.previous = null;
     }
   }
 }
